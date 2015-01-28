@@ -1,4 +1,4 @@
-import org.jibble.pirbot.*;
+import org.jibble.pircbot.*;
 
 public class ChefBot extends PircBot {
 
@@ -12,4 +12,5 @@ public class ChefBot extends PircBot {
             String time = new java.util.Date().toString();
             sendMessage(channel, sender + ": The time is now " + time);
         }
+}
 }
