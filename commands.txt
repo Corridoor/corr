@@ -1,0 +1,9 @@
+ !identityCheck your own identity. ALL VIEWERS
+
+!identity usernameCheck another viewer's identity (EXAMPLE: !identity HandsomeKal) MOD ONLY
+
+!identity randomGenerate a random name. MOD ONLY
+
+!identity setManually set a name (EXAMPLE: !identity set HandsomeKal Blind Warrior) MOD ONLY
+
+
