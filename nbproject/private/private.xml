@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Brian/Coding/corr/src/prop2.java</file>
-            <file>file:/C:/Users/Brian/Coding/corr/src/propertiesFoo.java</file>
+            <file>jar:file:/C:/Users/Brian/Coding/corr/pircbot.jar!/org/jibble/pircbot/InputThread.java</file>
+            <file>file:/C:/Users/Brian/Coding/corr/config.properties</file>
+            <file>file:/C:/Users/Brian/Coding/corr/src/rocks/atkailash/chefbot/ChefBotMain.java</file>
+            <file>file:/C:/Users/Brian/Coding/corr/src/rocks/atkailash/chefbot/ChefBot.java</file>
+            <file>file:/C:/Users/Brian/Coding/corr/src/rocks/atkailash/chefbot/propertiesFoo.java</file>
         </group>
     </open-files>
 </project-private>

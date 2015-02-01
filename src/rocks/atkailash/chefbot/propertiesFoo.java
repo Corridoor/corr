@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 /**
@@ -46,6 +47,23 @@ public class propertiesFoo {
      * Should store the property value to the variable of the same name
      * @throws java.io.IOException 
     */
+    public static boolean allPropertiesIn() throws IOException {
+        boolean wasSuccess = false;
+        Iterator it = validProperties.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry)it.next();
+            String currentKey = (String) pairs.getKey();
+            if (readProperty(currentKey)) {
+                it.remove();
+            } else if (null != validProperties.get("foodList")){
+                wasSuccess = true;
+            } else {
+                    wasSuccess = false;
+                    }
+            wasSuccess = true;
+        }
+        return wasSuccess;
+    }
     public static boolean readProperty(String theProperty) throws IOException {
         
         InputStream propertiesFile = null;
