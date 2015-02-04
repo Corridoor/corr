@@ -48,20 +48,21 @@ public class propertiesFoo {
      * @throws java.io.IOException 
     */
     public static boolean allPropertiesIn() throws IOException {
-        boolean wasSuccess = false;
+        boolean wasSuccess;
         Iterator it = validProperties.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pairs = (Map.Entry)it.next();
             String currentKey = (String) pairs.getKey();
             if (readProperty(currentKey)) {
                 it.remove();
-            } else if (null != validProperties.get("foodList")){
+            } else if (null != prop.getProperty("foodList")){
                 wasSuccess = true;
             } else {
                     wasSuccess = false;
                     }
             wasSuccess = true;
         }
+        wasSuccess = true;
         return wasSuccess;
     }
     public static boolean readProperty(String theProperty) throws IOException {

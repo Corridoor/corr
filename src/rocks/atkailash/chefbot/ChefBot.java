@@ -7,10 +7,26 @@ import static rocks.atkailash.chefbot.propertiesFoo.prop;
 
 public class ChefBot extends PircBot {
     public static String theCommand;
-
+    
+    public static String[] foodNames;
+    public static String[] otherWords;
+    public static String theFoods;
+    public static String theWords;
     public ChefBot() throws IOException {
+        int i;
         propertiesFoo.allPropertiesIn();
 	this.setName(prop.getProperty("botName"));
+        
+        foodNames = listReader.listReader("foods");
+        otherWords = listReader.listReader("other");
+        theFoods = "";
+        for (i = 0; i < foodNames.length; i++) {
+            theFoods = theFoods + " " + foodNames[i];
+            }
+        theWords = "";
+        for (i = 0; i < otherWords.length; i++) {
+            theWords = theWords + " " + otherWords[i];
+            }
     }
     
     public void onMessage(String channel, String sender,
@@ -42,10 +58,17 @@ public class ChefBot extends PircBot {
     }
     
     public void processNormalCommand(String channel, String sender, String theCommand) {
+        int i;
         switch (theCommand) {
             case "time":
                 String time = new java.util.Date().toString();
                 sendMessage(channel, sender + ": The time is now " + time);
+                break;
+            case "foods":
+                sendMessage(channel, sender + " the foods are: " + theFoods);
+                break;
+            case "ow":
+                sendMessage(channel, sender + " the other words are: " + theWords);
                 break;
             default:
                 sendMessage(channel, sender + "-> I don't recognize that command");
