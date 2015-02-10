@@ -12,12 +12,18 @@ public class ChefBot extends PircBot {
     public static String[] otherWords;
     public static String theFoods;
     public static String theWords;
+    private listReader foodLR;
+    private listReader otherLR;
+    
     public ChefBot() throws IOException {
         int i;
         propertiesFoo.allPropertiesIn();
 	this.setName(prop.getProperty("botName"));
-        
-        foodNames = listReader.listReader("foods");
+        foodLR = new listReader(prop.getProperty("foodList"));
+        otherLR = new listReader(prop.getProperty("otherList"));
+        foodLR.readList();
+        otherLR.readList();
+        /* foodNames = listReader.listReader("foods");
         otherWords = listReader.listReader("other");
         theFoods = "";
         for (i = 0; i < foodNames.length; i++) {
@@ -26,7 +32,7 @@ public class ChefBot extends PircBot {
         theWords = "";
         for (i = 0; i < otherWords.length; i++) {
             theWords = theWords + " " + otherWords[i];
-            }
+            } */
     }
     
     public void onMessage(String channel, String sender,
@@ -65,10 +71,13 @@ public class ChefBot extends PircBot {
                 sendMessage(channel, sender + ": The time is now " + time);
                 break;
             case "foods":
-                sendMessage(channel, sender + " the foods are: " + theFoods);
+                sendMessage(channel, sender + " the food is: " + foodLR.chooseWord());
                 break;
             case "ow":
-                sendMessage(channel, sender + " the other words are: " + theWords);
+                sendMessage(channel, sender + " the other word is: " + otherLR.chooseWord());
+                break;
+            case "combo":
+                sendMessage(channel, sender + "Combo: " + otherLR.chooseWord() + " " + foodLR.chooseWord());
                 break;
             default:
                 sendMessage(channel, sender + "-> I don't recognize that command");
@@ -86,4 +95,5 @@ public class ChefBot extends PircBot {
                 break;
         }
     }
+    
 }

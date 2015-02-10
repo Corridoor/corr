@@ -5,22 +5,35 @@
  */
 package rocks.atkailash.chefbot;
 
-import java.io.IOException;
-import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
  * @author Brian
  */
 public class listReader {
-    private static String fileName;
+    private String theFile;
+    private FileReader fr;
+    private BufferedReader textReader;
+    private int numberOfLines;
+    private String[] textData;
     
-    public void notNeeded(String file_path) {
-        fileName = file_path + ".txt";
-    }
+    public listReader(String list_to_read) throws FileNotFoundException, IOException {
+        theFile = list_to_read;
+        fr = new FileReader(theFile);
+        textReader = new BufferedReader(fr);
+        numberOfLines = countLines(theFile);
+        this.textData = new String[numberOfLines];
+    }    
     
-    static int countLines(String fileName) throws IOException {
+    int countLines(String fileName) throws IOException {
         FileReader file_to_read = new FileReader(fileName);
         BufferedReader bf = new BufferedReader(file_to_read);
         
@@ -35,16 +48,8 @@ public class listReader {
         
         return numberOfLines;
 }
-    
-    public static String[] listReader(String list_to_read) throws IOException {
-        String theFile = list_to_read + ".txt";
-        FileReader fr = new FileReader(theFile);
-        BufferedReader textReader = new BufferedReader(fr);
-        
-        int numberOfLines = countLines(theFile);
-        String[] textData;
-        textData = new String[numberOfLines];
-        
+
+    public void readList() throws IOException {
         int i;
         
         for (i=0; i < numberOfLines; i++) {
@@ -52,7 +57,12 @@ public class listReader {
         }
         
         textReader.close();
-        return textData;
     }
     
+    public String chooseWord() {
+       int randomNum = new Random().nextInt(textData.length);
+       List<?> wordList=Arrays.asList(textData);
+       Collections.shuffle(wordList);
+       return (String) wordList.get(randomNum);
+    }
 }

@@ -16,8 +16,12 @@ public class ChefBotMain {
         bot.setVerbose(true);
         channelName = bot.getNick();
         readWorked = propertiesFoo.allPropertiesIn();
-        
-        // Checks if we put an argument and what that is, but default is to
+        if (readWorked) {
+
+        } else {
+            // I dunno, set a manual lsit of some sort?
+        } 
+       // Checks if we put an argument and what that is, but default is to
         // just run in twitch mode.
         if (readWorked && (args.length > 0)) {
             if (args[0].equals("debug")) {
