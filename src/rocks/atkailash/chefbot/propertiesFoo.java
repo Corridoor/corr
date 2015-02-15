@@ -1,3 +1,8 @@
+/*
+ * ChefBot by Brian B (atkailash) is licensed under the Creative Commons
+ * Attribution-ShareAlike 4.0 International License. To view a
+ * copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/
+ */
 package rocks.atkailash.chefbot;
 
 import java.io.FileInputStream;
@@ -15,7 +20,7 @@ import java.util.Properties;
  * @author Brian
  * @version Alfa
  */
-public class propertiesFoo {
+public class PropertiesFoo {
     // Declare statics to be used throughout the class
     /* protected static String oauthKey = null;
     public static String foodList = null;
@@ -33,6 +38,7 @@ public class propertiesFoo {
         put("botName", null);
         put("normalPrefix", "!");
         put("modPrefix", "$");
+        put("NameFile", null);
     }};
     static Properties prop = new Properties();
     protected static String propertyValue;
@@ -42,7 +48,6 @@ public class propertiesFoo {
     }
    /**
     * Returns value of a given property
-    * @param theProperty which property to read
      * @return <code>successfulOrNot</code> is true if read, false if error
      * Should store the property value to the variable of the same name
      * @throws java.io.IOException 
@@ -65,6 +70,15 @@ public class propertiesFoo {
         wasSuccess = true;
         return wasSuccess;
     }
+    /**
+     * Returns boolean whether property was correctly read. This basically is
+     * so it doesn't have to check each time a property wants to be done
+     * whether it is still null or whatnot, as the values are public to the
+     * package.
+     * @param theProperty this is the property to be read
+     * @return boolean if successful
+     * @throws IOException 
+     */
     public static boolean readProperty(String theProperty) throws IOException {
         
         InputStream propertiesFile = null;
@@ -95,8 +109,9 @@ public class propertiesFoo {
     }
     
     /**
-     * Save the value of a given property
-     * @param args key=val that is in config.properties
+     * Save the value of a given property. Not used as of 14-Feb-2015 but
+     * in just in case I later add visual config.
+     * @param args String in form "key=val" that is in config.properties
      * @return  returns True if successful, false otherwise.
      * @throws java.io.IOException
      */
@@ -123,7 +138,6 @@ public class propertiesFoo {
                     successfulOrNot = false;
                 }
             }
-        }
         return successfulOrNot;
     }
     
@@ -132,16 +146,17 @@ public class propertiesFoo {
      * is separate because in some later parts of the code it is not necessary
      * to check if reading was successful, as it would not be running at that
      * point (or shouldn't be anyway). Still will throw exception if reading
-     * doesn't work.
+     * doesn't work. May be removed, not sure this is needed since the prop 
+     * variable is imported in other areas and seems to work fine.
      * @param theProperty
-     * @return 
+     * @return string theValue of theProperty
      * @throws java.io.IOException 
      * @throws java.lang.NoSuchFieldException 
      * @throws java.lang.IllegalAccessException 
      */
     public static String getAndReturn(String theProperty) throws IOException, NoSuchFieldException, IllegalAccessException {
         readProperty(theProperty);
-        propertiesFoo thisClass = new propertiesFoo();
+        PropertiesFoo thisClass = new PropertiesFoo();
         Field f1;
         f1 = thisClass.getClass().getField(theProperty);
         String theValue;

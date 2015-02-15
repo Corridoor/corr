@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ChefBot by Brian B (atkailash) is licensed under the Creative Commons
+ * Attribution-ShareAlike 4.0 International License. To view a
+ * copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/
  */
 package rocks.atkailash.chefbot;
 
@@ -18,14 +18,14 @@ import java.util.Random;
  *
  * @author Brian
  */
-public class listReader {
+public class ListReader {
     private String theFile;
     private FileReader fr;
     private BufferedReader textReader;
     private int numberOfLines;
     private String[] textData;
     
-    public listReader(String list_to_read) throws FileNotFoundException, IOException {
+    public ListReader(String list_to_read) throws FileNotFoundException, IOException {
         theFile = list_to_read;
         fr = new FileReader(theFile);
         textReader = new BufferedReader(fr);

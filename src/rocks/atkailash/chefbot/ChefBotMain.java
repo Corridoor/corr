@@ -2,7 +2,7 @@ package rocks.atkailash.chefbot;
 
 import java.io.IOException;
 import org.jibble.pircbot.IrcException;
-import static rocks.atkailash.chefbot.propertiesFoo.prop;
+import static rocks.atkailash.chefbot.PropertiesFoo.prop;
 
 public class ChefBotMain {
         static String theOauth;
@@ -15,7 +15,7 @@ public class ChefBotMain {
         bot = new ChefBot();
         bot.setVerbose(true);
         channelName = bot.getNick();
-        readWorked = propertiesFoo.allPropertiesIn();
+        readWorked = PropertiesFoo.allPropertiesIn();
         if (readWorked) {
 
         } else {

@@ -1,9 +1,16 @@
+/*
+ * ChefBot by Brian B (atkailash) is licensed under the Creative Commons
+ * Attribution-ShareAlike 4.0 International License. To view a
+ * copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/
+ */
 package rocks.atkailash.chefbot;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jibble.pircbot.PircBot;
 import org.jibble.pircbot.User;
-import static rocks.atkailash.chefbot.propertiesFoo.prop;
+import static rocks.atkailash.chefbot.PropertiesFoo.prop;
 
 public class ChefBot extends PircBot {
     public static String theCommand;
@@ -12,15 +19,17 @@ public class ChefBot extends PircBot {
     public static String[] otherWords;
     public static String theFoods;
     public static String theWords;
-    private listReader foodLR;
-    private listReader otherLR;
+    private ListReader foodLR;
+    private ListReader otherLR;
+    String fileName;
     
     public ChefBot() throws IOException {
         int i;
-        propertiesFoo.allPropertiesIn();
+        PropertiesFoo.allPropertiesIn();
 	this.setName(prop.getProperty("botName"));
-        foodLR = new listReader(prop.getProperty("foodList"));
-        otherLR = new listReader(prop.getProperty("otherList"));
+        fileName = prop.getProperty("NameFile");
+        foodLR = new ListReader(prop.getProperty("foodList"));
+        otherLR = new ListReader(prop.getProperty("otherList"));
         foodLR.readList();
         otherLR.readList();
         /* foodNames = listReader.listReader("foods");
@@ -41,7 +50,11 @@ public class ChefBot extends PircBot {
         String modPrefix = prop.getProperty("modPrefix");
         if (message.startsWith(normalPrefix)) {
             theCommand = message.substring(1);
-            processNormalCommand(channel, sender, theCommand);
+            try {
+                processNormalCommand(channel, sender, theCommand);
+            } catch (IOException ex) {
+                Logger.getLogger(ChefBot.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (message.startsWith(modPrefix) && testMod(channel, sender)) {
             theCommand = message.substring(1);
             processModCommand(channel, sender, theCommand);
@@ -63,7 +76,7 @@ public class ChefBot extends PircBot {
         return isUserMod;
     }
     
-    public void processNormalCommand(String channel, String sender, String theCommand) {
+    public void processNormalCommand(String channel, String sender, String theCommand) throws IOException {
         int i;
         switch (theCommand) {
             case "time":
@@ -77,7 +90,14 @@ public class ChefBot extends PircBot {
                 sendMessage(channel, sender + " the other word is: " + otherLR.chooseWord());
                 break;
             case "combo":
-                sendMessage(channel, sender + "Combo: " + otherLR.chooseWord() + " " + foodLR.chooseWord());
+                String newName = otherLR.chooseWord() + " " + foodLR.chooseWord();
+                sendMessage(channel, sender + "Combo: " + newName);
+                try {
+                    boolean didWork = NameStorage.storeName(sender, newName, fileName);
+                    if (didWork) { sendMessage(channel, "Storage Successful."); }
+                } catch (IOException ex) {
+                Logger.getLogger(ChefBot.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 break;
             default:
                 sendMessage(channel, sender + "-> I don't recognize that command");
