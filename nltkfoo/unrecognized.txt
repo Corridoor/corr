@@ -1,0 +1,37 @@
+barbecue
+bind
+blanche
+butterfly
+char-broil
+chunk
+debone
+deep fry
+deglaze
+dough
+flambe
+flavor
+French fry
+gel
+gratin
+hard boil
+hull
+juice
+julienne
+microwave
+mold
+oven fry
+pan fry
+precook
+P cont.
+puree
+raw
+saute
+schirr
+sear
+slow cook
+S cont.
+soft boil
+stir fry
+sweat
+uncured
+unmold
