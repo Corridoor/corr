@@ -3,8 +3,6 @@ alfalfa sprouts
 almond
 anchovy
 anise
-appetizer
-appetite
 apple
 apricot
 artichoke
@@ -27,8 +25,8 @@ beans
 beef
 beet
 bell pepper
-berry
-biscuit
+berries
+biscuits
 bitter
 black beans
 blackberry
@@ -43,13 +41,10 @@ boysenberry
 bran
 bread
 breadfruit
-breakfast
 brisket
 broccoli
-broil
 brownie
 brown rice
-brunch
 Brussels sprouts
 buckwheat
 buns
@@ -57,9 +52,6 @@ burrito
 butter
 butter bean
 cake
-calorie
-candy
-candy apple
 cantaloupe
 capers
 caramel
@@ -69,10 +61,8 @@ carrot
 cashew
 cassava
 casserole
-cater
 cauliflower
 caviar
-cayenne pepper
 celery
 cereal
 chard
@@ -94,18 +84,14 @@ chutney
 cilantro
 cinnamon
 citron
-citrus
 clam
 cloves
 cobbler
 coconut
 cod
-coffee
 coleslaw
 collard greens
-comestibles
 cook
-cookbook
 cookie
 corn
 cornflakes
@@ -128,59 +114,36 @@ curds
 currants
 curry
 custard
-
-
 daikon
 daily bread
 dairy
 dandelion greens
 Danish pastry
 dates
-dessert
-diet
-digest
-digestive system
 dill
-dine
-diner
-dinner
-dip
-dish
 dough
 doughnut
 dragonfruit
 dressing
 dried
-drink
-dry
 durian
-eat
 Edam cheese
 edible
 egg
 eggplant
 elderberry
 endive
-entree
-fast
 fat
-fava bans
+fava beans
 feast
 fed
 feed
 fennel
 fig
-fillet
-fire
 fish
 flan
 flax
 flour
-food
-food pyramid
-foodstuffs
-fork
-freezer
 French fries
 fried
 fritter
