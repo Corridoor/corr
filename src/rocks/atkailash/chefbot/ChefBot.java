@@ -7,6 +7,8 @@ package rocks.atkailash.chefbot;
 
 import java.io.IOException;
 import static java.lang.String.format;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jibble.pircbot.PircBot;
@@ -52,8 +54,13 @@ public class ChefBot extends PircBot {
         String modPrefix = prop.getProperty("modPrefix");
         if (message.startsWith(normalPrefix)) {
             theCommand = message.substring(1);
+            String[] theArgs = message.split(" ");
             try {
-                processNormalCommand(channel, sender, theCommand);
+                if (message.split(" ", 2).length > 1) {
+                    processArgCommand(channel, sender, theCommand, theArgs);
+                } else {
+                    processNormalCommand(channel, sender, theCommand);
+                }
             } catch (IOException ex) {
                 Logger.getLogger(ChefBot.class.getName()).log(Level.SEVERE,
                         null, ex);
@@ -101,7 +108,29 @@ public class ChefBot extends PircBot {
     public void processNormalCommand(String channel, String sender,
             String theCommand) throws IOException {
         int i;
-        switch (theCommand) {
+        String mname = format("do_%s", theCommand);
+        try {
+            Class<?> doThings = Class.forName("DoCommands");
+            try {
+                Method theMethod = doThings.getDeclaredMethod(mname);
+                try {
+                    theMethod.invoke(null);
+                } catch (IllegalAccessException | IllegalArgumentException | 
+                        InvocationTargetException ex) {
+                    Logger.getLogger(ChefBot.class.getName()).log(Level.SEVERE, 
+                            null, ex);
+                }
+            } catch (NoSuchMethodException | SecurityException ex) {
+                sendMessage(channel, sender + "-> no such command!");
+                Logger.getLogger(ChefBot.class.getName()).log(Level.SEVERE, null, 
+                        ex);
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ChefBot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        /* switch (theCommand) {
             case "time":
                 String time = new java.util.Date().toString();
                 sendMessage(channel, sender + ": The time is now " + time);
@@ -131,7 +160,7 @@ public class ChefBot extends PircBot {
             default:
                 sendMessage(channel, sender + "-> I don't recognize that command");
                 break;
-        }
+        } */
     }
 
     public void processModCommand(String channel, String sender, String theCommand) {
@@ -143,6 +172,10 @@ public class ChefBot extends PircBot {
                 sendMessage(channel, sender + "-> I don't recognize that command");
                 break;
         }
+    }
+
+    private void processArgCommand(String channel, String sender, String theCommand, String[] theArgs) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
