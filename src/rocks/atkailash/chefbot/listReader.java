@@ -19,50 +19,51 @@ import java.util.Random;
  * @author Brian
  */
 public class ListReader {
+
     private String theFile;
     private FileReader fr;
     private BufferedReader textReader;
     private int numberOfLines;
     private String[] textData;
-    
+
     public ListReader(String list_to_read) throws FileNotFoundException, IOException {
         theFile = list_to_read;
         fr = new FileReader(theFile);
         textReader = new BufferedReader(fr);
         numberOfLines = countLines(theFile);
         this.textData = new String[numberOfLines];
-    }    
-    
+    }
+
     int countLines(String fileName) throws IOException {
         FileReader file_to_read = new FileReader(fileName);
         BufferedReader bf = new BufferedReader(file_to_read);
-        
+
         String aLine;
         int numberOfLines = 0;
-        
-        while (( aLine = bf.readLine()) != null) {
+
+        while ((aLine = bf.readLine()) != null) {
             numberOfLines++;
         }
-        
+
         bf.close();
-        
+
         return numberOfLines;
-}
+    }
 
     public void readList() throws IOException {
         int i;
-        
-        for (i=0; i < numberOfLines; i++) {
+
+        for (i = 0; i < numberOfLines; i++) {
             textData[i] = textReader.readLine();
         }
-        
+
         textReader.close();
     }
-    
+
     public String chooseWord() {
-       int randomNum = new Random().nextInt(textData.length);
-       List<?> wordList=Arrays.asList(textData);
-       Collections.shuffle(wordList);
-       return (String) wordList.get(randomNum);
+        int randomNum = new Random().nextInt(textData.length);
+        List<?> wordList = Arrays.asList(textData);
+        Collections.shuffle(wordList);
+        return (String) wordList.get(randomNum);
     }
 }

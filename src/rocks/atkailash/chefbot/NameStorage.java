@@ -12,15 +12,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
+import static rocks.atkailash.chefbot.PropertiesFoo.prop;
+
 /**
  * This class stores the names in a config file, for easy access/changes done
  * manually if desired. May move to SQLite
+ *
  * @author Brian
  */
 public class NameStorage {
+        static ListReader foodLR;
+        static ListReader otherLR;
+        static String fileName;
+        static String theFood;
+        static String theWord;
+        static String[] foodNames;
+        static String[] otherWords;
+
+        
     static Properties nameStorage = new Properties();
-    
-    public boolean openFile(String fileName) throws FileNotFoundException, IOException {
+
+    public boolean openFile(String fileName) throws FileNotFoundException, 
+            IOException {
         InputStream theFile = null;
         boolean successfulOrNot = false; // Assume it doesn't actually get found
         try {
@@ -34,10 +47,11 @@ public class NameStorage {
             successfulOrNot = false;
             ex.printStackTrace();
         }
-       return successfulOrNot;
+        return successfulOrNot;
     }
-    
-    public static boolean storeName(String twitchName, String chefName, String fileName) throws IOException {
+
+    public static boolean storeName(String twitchName, String chefName, 
+            String fileName) throws IOException {
         OutputStream output = null;
         boolean successfulOrNot = false;
         try {
@@ -56,9 +70,45 @@ public class NameStorage {
                 } catch (IOException e) {
                     e.printStackTrace();
                     successfulOrNot = false;
-                    }
+                }
             }
         }
         return successfulOrNot;
+    }
+    
+    public static String getName(String twitchName) {
+        if (nameStorage.containsKey(twitchName)) {
+            return nameStorage.getProperty(twitchName);
+        } else {
+            return "No specialty!";
+        }
+    }
+    
+    /**
+     * 
+     * @param twitchName
+     * @return
+     * @throws IOException 
+     */
+    public static boolean newName(String twitchName) throws IOException {
+        fileName = prop.getProperty("NameFile");
+        foodLR = new ListReader(prop.getProperty("foodList"));
+        otherLR = new ListReader(prop.getProperty("otherList"));
+        foodLR.readList();
+        otherLR.readList();
+        String newName;
+        Boolean nameStored;
+        
+        theWord = otherLR.chooseWord();
+        theFood = foodLR.chooseWord();
+        newName = theWord + " " + theFood;
+        nameStored = storeName(twitchName, newName, fileName);
+        
+        if (nameStored) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
